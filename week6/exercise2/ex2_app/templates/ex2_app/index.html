@@ -1,0 +1,54 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Magazine Cover Generator</title>
+    <link rel="stylesheet" href="{% static 'ex2_app/style.css' %}">
+</head>
+<body>
+
+<h2>Magazine Cover Generator</h2>
+
+<form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+
+    <label>Title:</label>
+    <input type="text" name="title" required>
+
+    <label>Subtitle:</label>
+    <input type="text" name="subtitle" required>
+
+    <label>Background Color:</label>
+    <input type="color" name="bg_color" value="#ffffff">
+
+    <label>Font Color:</label>
+    <input type="color" name="font_color" value="#000000">
+
+    <label>Font Size (px):</label>
+    <input type="number" name="font_size" value="40">
+
+    <label>Select Image:</label>
+    <input type="file" name="image">
+
+    <button type="submit">Generate Cover</button>
+</form>
+
+{% if title %}
+<div class="cover"
+     style="background-color: {{ bg_color }}; color: {{ font_color }};">
+
+    {% if image_url %}
+        <img src="{{ image_url }}" class="cover-image">
+    {% endif %}
+
+    <h1 style="font-size: {{ font_size }}px;">
+        {{ title }}
+    </h1>
+
+    <h3>{{ subtitle }}</h3>
+
+</div>
+{% endif %}
+
+</body>
+</html>

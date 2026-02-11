@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Simple Calculator</title>
+</head>
+<body>
+
+<h2>Basic Arithmetic Calculator</h2>
+
+<form method="POST">
+    {% csrf_token %}
+
+    <input type="number" name="num1" required>
+    <input type="number" name="num2" required>
+
+    <select name="operation">
+        <option value="add">Addition</option>
+        <option value="subtract">Subtraction</option>
+        <option value="multiply">Multiplication</option>
+        <option value="divide">Division</option>
+    </select>
+
+    <button type="submit">Calculate</button>
+</form>
+
+{% if result is not None %}
+    <h3>Result: {{ result }}</h3>
+{% endif %}
+
+{% if error %}
+    <h3 style="color:red;">{{ error }}</h3>
+{% endif %}
+
+</body>
+</html>
